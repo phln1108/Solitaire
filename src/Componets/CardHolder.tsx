@@ -1,24 +1,19 @@
-import { useState } from "react"
-import "./Cards"
-import { Deck } from "./Cards"
+import { CardElement, Deck, revealType } from "./Cards"
 
 type CardHolderProps = {
     deck: Deck,
-    // onclick: () => void
+    reveal: boolean
+    onclick?: () => void
+    state: number
 }
 
-export const Cardholder = (props : CardHolderProps) => {
-    var [teste,setTeste] = useState(0)
-
-    function onclick() {
-        setTeste(teste + 1)
-    }
-
-
+export const Cardholder = (props: CardHolderProps) => {
+    var state: revealType = props.reveal ? revealType.SHOW : revealType.HIDDEN
+    if (props.deck.cards.length === 0)
+        state = revealType.EMPTY
     return (
-        <>
-            <button onClick={onclick}>{props.deck.cards[teste].value}{props.deck.cards[teste].nipe}</button>
-            {/* <button>{props.deck.cards.length}</button> */}
-        </>
+        <div onClick={props.onclick}>
+            <CardElement card={props.deck.cards[props.state]} reveal={state}></CardElement>
+        </div>
     )
 }

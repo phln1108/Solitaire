@@ -1,3 +1,6 @@
+// import styled from 'styled-components';
+import "./Cards.css"
+
 export const CardInfo = {
     nipes: ["♣️", "♠️", "♥️", "♦️"],
     values: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"],
@@ -77,10 +80,46 @@ export function createPack(deck: Deck, num: number): Array<Deck> {
     decks.push(new_pack)
     return decks
 }
-export const CardElement = (card: Card) => {
-    return (
-        <>
-        
-        </>
-    )
+
+export enum revealType {
+    SHOW,
+    HIDDEN,
+    EMPTY
+}
+
+type CardElementProps = {
+    card: Card,
+    reveal: revealType
+}
+
+
+export const CardElement = (props: CardElementProps) => {
+    switch(props.reveal){
+        case revealType.SHOW:
+            return (
+                <div className="Card">
+                    <div className="CardLabelBegin">
+                        <label className="CardLabel" style={props.card.color === "r" ? { color: "#be1931" } : { color: "black" }}>{props.card.value}</label>
+                        <label className="CardLabelNipe">{props.card.nipe}</label>
+                    </div>
+                    <label className="CardLabelMiddle">{props.card.nipe}</label>
+                    <div className="CardLabelEnd rotated">
+                        <label className="CardLabel" style={props.card.color === "r" ? { color: "#be1931" } : { color: "black" }}>{props.card.value}</label>
+                        <label className="CardLabelNipe">{props.card.nipe}</label>
+                    </div>
+                </div>
+            )
+        case revealType.HIDDEN:
+            return (
+                <div className="Card reverse">
+                    <label className="CardLabelMiddle">🌀</label>
+                </div>
+            )
+        default:
+            return (
+                <div className="Card empty">
+                    <label className="CardLabelMiddle">O</label>
+                </div>
+            )
+    }
 }

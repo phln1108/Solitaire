@@ -1,0 +1,55 @@
+.Card {
+    display:flex;
+    width: 100px;
+    height: 140px;
+    border-radius: 5%;
+    border: 1px solid;
+    border-color: black;
+    background-color: #f5f5dc;
+    position: relative;
+}
+
+.CardLabelBegin {
+    margin-left: 0.4ex;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.CardLabel {
+    font-size: x-large;
+}
+
+.CardLabelNipe {
+    font-size: small;
+    vertical-align: middle;
+}
+
+.CardLabelEnd {
+    margin-right: 0.4ex;
+    font-size: x-large;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.CardLabelMiddle {
+    font-size: 500%;
+    position: absolute;
+    align-self: center;
+    width: 100%;
+    text-align: center;
+}
+
+.rotated {
+    transform: rotate(180deg);
+}
+
+.reverse {
+    background-color: #75756a;
+}
+
+.empty {
+    color: darkgray;
+    background-color: gray;
+}
