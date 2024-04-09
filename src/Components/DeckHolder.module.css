@@ -1,0 +1,5 @@
+.cardHolder {
+    display: flex;
+    gap: 0.125rem;
+    margin-left: 0.5rem;
+}

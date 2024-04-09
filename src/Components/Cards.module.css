@@ -1,0 +1,69 @@
+.card {
+    display: flex;
+    width: 5rem;
+    height: 7.5rem;
+    border-radius: 8px;
+    border: 1px solid black;
+    position: relative;
+    background: white;
+}
+
+.topOfCard {
+    display: flex;
+    width: 5rem;
+    height: 2.5rem;
+    border-top-left-radius: 8px ;
+    border-top-right-radius: 8px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    position: relative;
+    background: white;
+    
+}
+
+.cardBeginLabel {
+    margin-left: 0.4rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cardLabel {
+    font-size: x-large;
+}
+
+.cardLabelNipe {
+    font-size: small;
+    vertical-align: middle;
+}
+
+.cardLabelEnd {
+    margin-right: 0.4ex;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.cardLabelMiddle {
+    font-size: 200%;
+    position: absolute;
+    align-self: center;
+    width: 100%;
+    text-align: center;
+}
+
+.rotated {
+    transform: rotate(180deg);
+}
+
+.reverse {
+    background-color: #75756a;
+}
+
+.empty {
+    color: darkgray;
+    background-color: gray;
+}
+
+
