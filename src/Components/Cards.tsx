@@ -82,6 +82,10 @@ export function createPack(deck: Card[], num: number): Array<Card[]> {
     return decks
 }
 
+export function getIndex(card : Card) {
+    return CardInfo.values.indexOf(card.value)
+}
+
 export enum revealType {
     SHOW,
     HIDDEN,

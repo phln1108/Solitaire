@@ -1,14 +1,15 @@
-import { useState } from "react"
 import { Card, CardElement, TopOfCard, revealType } from "./Cards"
 import styles from "./CardHolder.module.css"
 
 interface Props {
     deck: Card[],
+    id: number
+    clickHandler: (id: number) => void
 }
 
 export const CardHolder = (props: Props) => {
     return (
-        <div className={styles.cardHolder}>
+        <div onClick={() => {props.clickHandler(props.id)}} className={styles.cardHolder}>
             {props.deck.map((card, index) => {
                 if (index !== props.deck.length - 1)
                     return <TopOfCard

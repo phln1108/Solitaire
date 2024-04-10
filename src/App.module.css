@@ -1,20 +1,3 @@
-.wrapper {
-    margin: 1rem auto;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    
-}
-
-.cardArea {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-left: 4rem;
-    margin-right: 4rem;
-}
-
 /* @media (max-width: 800px) {
     html {
         font-size: 87.5%;
@@ -24,12 +7,3 @@
         grid-template-columns: 1fr;
     }
 } */
-
-.nipeConteiners {
-    display: block;
-    gap: 0.5rem;
-}
-
-.nipeConteiners *{
-    margin-bottom: 0.250rem;
-}

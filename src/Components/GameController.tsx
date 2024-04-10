@@ -1,0 +1,110 @@
+import { useState } from "react"
+import { Card, createPack, getIndex } from "./Cards"
+import { DeckHolder } from "./DeckHolder"
+import { NipeDeckHolder } from "./NipeDeckHolder"
+import { CardHolder } from "./CardHolder"
+
+import styles from "./GameController.module.css"
+
+interface Props {
+    deck: Card[]
+}
+
+export const GameController = (props: Props) => {
+    function start() {
+        const packs: Card[][] = [[...props.deck]]
+        for (let i = 1; i < 9; i++) {
+            [packs[0], packs[i]] = createPack(packs[0], i - 1)
+        }
+        return [...packs, [], [], [], []]
+    }
+
+    const [decks, setDecks] = useState(start())
+    const [firstSelected, setFirstSelected] = useState(-1)
+    const [deckHolderCard, setDeckHolderCard] = useState(-1)
+
+    function handleDeckHolderSelect(cardIndex: number) {
+        if (firstSelected === 0) {
+            setFirstSelected(-1)
+            return
+        }
+        setFirstSelected(0)
+        setDeckHolderCard(cardIndex)
+    }
+
+    function handleCardHOlderSelect(id: number) {
+        console.log(decks[id][decks[id].length - 1])
+
+
+        if (firstSelected === -1) {
+            setFirstSelected(id)
+            return
+        }
+
+        if (firstSelected === id) {
+            setFirstSelected(-1)
+            return
+        }
+
+        var index = firstSelected === 0 ? deckHolderCard : decks[firstSelected].length - 1
+        console.log(index)
+        const card: Card = decks[firstSelected][index]
+        console.log(card)
+
+        if ((decks[id].length !== 0 && card.color !== decks[id][decks[id].length - 1].color && getIndex(card) === getIndex(decks[firstSelected][index])) || (decks[id].length === 0 && card.value === "K")) {
+            setDecks(old_decks => {
+                const new_decks = [...old_decks]
+                new_decks[firstSelected] = [...new_decks[firstSelected]].filter((deckDard) => {
+                    return card.value !== deckDard.value || card.nipe !== deckDard.nipe
+                })
+                new_decks[id] = [...new_decks[id], card]
+                return new_decks
+            })
+        }
+        setFirstSelected(-1)
+    }
+
+    function handleNipeCardHOlderSelect(id: number, nipe: string) {
+        if (firstSelected === -1) {
+            return
+        }
+
+        var index = firstSelected === 0 ? deckHolderCard : decks[firstSelected].length - 1
+        console.log(index)
+        const card: Card = decks[firstSelected][index]
+        console.log(card)
+
+        if ((decks[id].length === 0 && card.value === "A" || decks[id].length !== 0 && getIndex(decks[id][decks[id].length -1]) === getIndex(card) -1) && card.nipe === nipe ) {
+            setDecks(old_decks => {
+                const new_decks = [...old_decks]
+                new_decks[firstSelected] = [...new_decks[firstSelected]].filter((deckDard) => {
+                    return card.value !== deckDard.value || card.nipe !== deckDard.nipe
+                })
+                new_decks[id] = [...new_decks[id], card]
+                return new_decks
+            })
+        }
+        setFirstSelected(-1)
+    }
+
+
+
+    return (
+        <div className={styles.wrapper}>
+            <DeckHolder handleClick={handleDeckHolderSelect} deck={decks[0]}></DeckHolder>
+            <div className={styles.cardArea}>
+                {decks.map((deck, index) => {
+                    if (index === 0 || index > 8)
+                        return
+                    return <CardHolder clickHandler={handleCardHOlderSelect} key={index} deck={deck} id={index} />
+                })}
+            </div>
+            <div className={styles.nipeConteiners}>
+                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[9]} nipe={"♣️"} id={9}></NipeDeckHolder>
+                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[10]} nipe={"♠️"} id={10}></NipeDeckHolder>
+                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[11]} nipe={"♥️"} id={11}></NipeDeckHolder>
+                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[12]} nipe={"♦️"} id={12}></NipeDeckHolder>
+            </div>
+        </div>
+    )
+}

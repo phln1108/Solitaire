@@ -1,22 +1,14 @@
-import { useState } from "react"
 import { Card, CardElement, revealType } from "./Cards"
 
 interface Props {
     deck: Card[],
     nipe: string
+    id: number
+    handleClick: (id: number, nipe: string,) => void
 }
 
 export const NipeDeckHolder = (props: Props) => {
-    const revealDeck = props.deck.length === 0 || props.deck.length === 0? revealType.EMPTY : revealType.SHOW 
-    const [topCard, setTopCard] = useState(0)
+    const revealDeck = props.deck.length === 0 || props.deck.length === 0 ? revealType.EMPTY : revealType.SHOW
 
-    const handleClickCard = () => {
-        setTopCard(topCard + 1)
-    }
-
-    return (
-        <div onClick={handleClickCard}>
-            <CardElement card={props.deck[topCard]} reveal={revealDeck} empty_nipe={props.nipe}></CardElement>
-        </div>
-    )
+    return (<CardElement onClick={() => {props.handleClick(props.id,props.nipe)}} card={props.deck[props.deck.length]} reveal={revealDeck} empty_nipe={props.nipe}></CardElement>)
 }
