@@ -1,21 +1,24 @@
 import { Card, CardElement, TopOfCard, revealType } from "./Cards"
 import styles from "./CardHolder.module.css"
 
-interface Props {
+interface PropsCardHolder {
     deck: Card[],
     id: number
-    clickHandler: (id: number) => void
+    clickHandler: (id: number, index: number) => void
+    selected: number
 }
 
-export const CardHolder = (props: Props) => {
+export const CardHolder = (props: PropsCardHolder) => {
     return (
-        <div onClick={() => {props.clickHandler(props.id)}} className={styles.cardHolder}>
+        <div className={styles.cardHolder}>
             {props.deck.map((card, index) => {
                 if (index !== props.deck.length - 1)
                     return <TopOfCard
                         key={card.value + card.nipe}
                         card={card}
                         reveal={card.reveal}
+                        onClick={card.reveal === revealType.SHOW ?() => {props.clickHandler(props.id,index)} : undefined}
+                        selected={index == props.selected}
                     />
 
                 if (card.reveal === revealType.HIDDEN) {
@@ -26,9 +29,11 @@ export const CardHolder = (props: Props) => {
                     key={card.value + card.nipe}
                     card={card}
                     reveal={card.reveal}
+                    onClick={() => {props.clickHandler(props.id,index)}}
+                    selected={index == props.selected}
                 />
             })}
-            {props.deck.length === 0 ? <CardElement card={props.deck[0]} reveal={revealType.EMPTY}></CardElement> : <></>}
+            {props.deck.length === 0 ? <CardElement selected={false} onClick={() => {props.clickHandler(props.id,-1)}} card={props.deck[0]} reveal={revealType.EMPTY}/> : <></>}
         </div>
     )
 }

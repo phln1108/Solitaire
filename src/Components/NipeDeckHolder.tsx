@@ -10,5 +10,5 @@ interface Props {
 export const NipeDeckHolder = (props: Props) => {
     const revealDeck = props.deck.length === 0 || props.deck.length === 0 ? revealType.EMPTY : revealType.SHOW
 
-    return (<CardElement onClick={() => {props.handleClick(props.id,props.nipe)}} card={props.deck[props.deck.length]} reveal={revealDeck} empty_nipe={props.nipe}></CardElement>)
+    return (<CardElement selected={false} onClick={() => { props.handleClick(props.id, props.nipe) }} card={props.deck[props.deck.length -1]} reveal={revealDeck} empty_nipe={props.nipe}></CardElement>)
 }

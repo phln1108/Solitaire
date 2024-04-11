@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Card, CardElement, getDeck, revealType } from "./Cards"
+import { Card, CardElement, revealType } from "./Cards"
 import styles from "./DeckHolder.module.css"
 
 
@@ -7,36 +7,33 @@ import styles from "./DeckHolder.module.css"
 
 interface Props {
     deck: Card[]
-    handleClick : (cardIndex: number) => void
+    handleClick: (cardIndex: number) => void
+    selected: number
 }
 
 export const DeckHolder = (props: Props) => {
-    const [deck, setDeck] = useState(props.deck)
-    const [placeholder, setPlaceholder] = useState(getDeck(0))
-    const [revealedCard, setRevealedCard] = useState(deck.length)
-    const revealDeck = deck.length == 0 ? revealType.EMPTY : revealType.HIDDEN
-    const revealPlaceholder = placeholder.length == 0 ? revealType.EMPTY : revealType.SHOW
+    const [revealedCard,setRevealedCard] = useState(props.deck.length)
+    const revealDeck = props.deck.length === 0 ? revealType.EMPTY : revealType.HIDDEN
+    const revealPlaceholder = revealedCard === props.deck.length ? revealType.EMPTY : revealType.SHOW
 
     function handleClickDeck() {
-        if (deck.length > 0) {
-            const newcard: Card = deck[deck.length -1]
-            setDeck((old_deck) => {
-                return old_deck.slice(0,old_deck.length -1)
-            })
-            setPlaceholder([...placeholder, newcard])
-            setRevealedCard(revealedCard -1)
-        }else {
-            setDeck([...placeholder].reverse())
-            setPlaceholder([...deck])
-            setRevealedCard(placeholder.length)
+        if (revealedCard === 0) {
+            setRevealedCard(props.deck.length)
+            return
         }
-        console.log(revealedCard-1)
+        setRevealedCard(revealedCard - 1)
+    }
+
+    function handleClickPlaceholder() {
+        if (revealPlaceholder !== revealType.EMPTY) {
+            props.handleClick(revealedCard)
+        }
     }
 
     return (
         <div className={styles.cardHolder}>
-            <CardElement onClick={handleClickDeck} card={deck[deck.length -1]} reveal={revealDeck}></CardElement>
-            <CardElement onClick={() => {placeholder.length !== 0 ? props.handleClick(revealedCard) : ""}} card={placeholder[placeholder.length -1]} reveal={revealPlaceholder}></CardElement>
+            <CardElement selected={false} onClick={handleClickDeck} card={props.deck[props.deck.length - 1]} reveal={revealDeck}></CardElement>
+            <CardElement selected={props.selected !== -1} onClick={handleClickPlaceholder} card={props.deck[revealedCard]} reveal={revealPlaceholder}></CardElement>
         </div>
     )
 }

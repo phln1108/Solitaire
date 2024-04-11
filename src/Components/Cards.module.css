@@ -66,4 +66,9 @@
     background-color: gray;
 }
 
+.selected {
+    border-color: red;
+    border-width: 3px;
+}
+
 

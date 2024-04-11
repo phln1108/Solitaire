@@ -16,7 +16,11 @@ export type Card = {
 export type Deck = {
     cards: Array<Card>
 }
-
+/**
+ * Create a Deck of cards
+ * @param num number of decks to be created
+ * @returns A deck with deck in it
+ */
 export function getDeck(num: number = 1): Card[] {
     var deck: Card[] = []
     for (let i = 0; i < num; i++) {
@@ -39,6 +43,12 @@ function getRandomInt(max: number): number {
     return Math.floor(Math.random() * max);
 }
 
+
+/**
+ * Shuffle's the card in the given deck
+ * @param deck Deck to be shuffled 
+ * @returns A copy of the original deck, but shuffled
+ */
 export function shuffle(deck: Card[]): Card[] {
     var shuffled_deck: Card[] = []
     var cards: Card[] = [...deck]
@@ -97,6 +107,7 @@ type CardElementProps = {
     reveal: revealType
     onClick?: () => void
     empty_nipe?: string
+    selected: boolean
 }
 
 
@@ -105,7 +116,7 @@ export const CardElement = (props: CardElementProps) => {
         case revealType.SHOW:
             const colorStyle = props.card.color === "r" ? { color: "#be1931" } : { color: "black" }
             return (
-                    <div className={styles.card} onClick={props.onClick}>
+                    <div className={styles.card + " " + (props.selected ? styles.selected : "")} onClick={props.onClick}>
                         <div className={styles.cardBeginLabel}>
                             <label className={styles.cardLabel} style={colorStyle}>{props.card.value}</label>
                             <label className={styles.cardLabelNipe} style={colorStyle}>{props.card.nipe}</label>
@@ -137,7 +148,7 @@ export const TopOfCard = (props: CardElementProps) => {
         case revealType.SHOW:
             const colorStyle = props.card.color === "r" ? { color: "#be1931" } : { color: "black" }
             return (
-                <div className={styles.topOfCard} onClick={props.onClick}>
+                <div className={styles.topOfCard + " " + (props.selected ? styles.selected : "")} onClick={props.onClick}>
                     <div className={styles.cardBeginLabel}>
                         <label className={styles.cardLabel} style={colorStyle}>{props.card.value}</label>
                         <label className={styles.cardLabelNipe} style={colorStyle}>{props.card.nipe}</label>
