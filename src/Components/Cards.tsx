@@ -121,7 +121,7 @@ export const CardElement = (props: CardElementProps) => {
                             <label className={styles.cardLabel} style={colorStyle}>{props.card.value}</label>
                             <label className={styles.cardLabelNipe} style={colorStyle}>{props.card.nipe}</label>
                         </div>
-                        <label className={styles.cardLabelMiddle}>{props.card.nipe}</label>
+                        <label className={styles.cardLabelMiddle} style={colorStyle}>{props.card.nipe}</label>
                         <div className={styles.cardLabelEnd}>
                             <label className={styles.cardLabel} style={colorStyle}>{props.card.value}</label>
                             <label className={styles.cardLabelNipe} style={colorStyle}>{props.card.nipe}</label>
@@ -157,15 +157,11 @@ export const TopOfCard = (props: CardElementProps) => {
             )
         case revealType.HIDDEN:
             return (
-                <div className={styles.topOfCard + " " + styles.reverse} onClick={props.onClick}>
-                    {/* <label className={styles.cardLabelMiddle}>🌀</label> */}
-                </div>
+                <div className={styles.topOfCard + " " + styles.reverse} onClick={props.onClick}/>
             )
         default:
             return (
-                <div className={styles.topOfCard + " " + styles.empty} onClick={props.onClick}>
-                    {/* <label className={styles.cardLabelMiddle}>{props.empty_nipe === undefined ? "O" : props.empty_nipe}</label> */}
-                </div>
+                <div className={styles.topOfCard + " " + styles.empty} onClick={props.onClick}/>
             )
     }
 }

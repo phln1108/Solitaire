@@ -6,7 +6,25 @@
     border: 1px solid black;
     position: relative;
     background: white;
+    cursor: pointer;
 }
+
+/* .card::before { 
+    position: absolute;
+    content: "";
+    width: 5rem;
+    height: 7.5rem;
+    background: tomato;
+    border-radius: 12px;
+    z-index: -1;
+    transition: 0.03s;
+    animation: animate 2s linaer infinite;
+}
+.card:hover::before {
+    width: 5.75rem;
+    height: 8.25rem;
+} */
+
 
 .topOfCard {
     display: flex;
@@ -69,6 +87,13 @@
 .selected {
     border-color: red;
     border-width: 3px;
+    animation: animate 2s linear infinite; 
 }
+@keyframes animate {
+    50% {
+        filter: hue-rotate(350deg);
+    }
+}
+
 
 

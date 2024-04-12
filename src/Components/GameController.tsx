@@ -37,6 +37,10 @@ export const GameController = (props: Props) => {
         console.log(decks[id][decks[id].length - 1])
 
         if (firstSelected === id || (index == -1 && firstSelected == -1)) {
+            if (index !== selectedCard){
+                setSelectedCard(index);
+                return
+            }
             setFirstSelected(-1)
             // setSelectedCard(-1)
             return
@@ -60,21 +64,24 @@ export const GameController = (props: Props) => {
                     new_decks[firstSelected] = [...new_decks[firstSelected]].filter((deckDard) => {
                         return card.value !== deckDard.value || card.nipe !== deckDard.nipe
                     })
-                    new_decks[id] = [...new_decks[id],card]
+                    new_decks[id] = [...new_decks[id], card]
                     return new_decks
                 })
-            }else {
+            } else {
                 setDecks(old_decks => {
                     const new_decks = [...old_decks]
                     const packOfCards = new_decks[firstSelected].slice(indexCard)
                     console.log(packOfCards)
-                    new_decks[firstSelected] = new_decks[firstSelected].slice(0,indexCard)
-                    new_decks[id] = [...new_decks[id],...packOfCards]
+                    new_decks[firstSelected] = new_decks[firstSelected].slice(0, indexCard)
+                    new_decks[id] = [...new_decks[id], ...packOfCards]
                     console.log(new_decks[id])
                     return new_decks
                 })
             }
-
+        } else if ((index !== -1 || firstSelected !== -1)) {
+            setFirstSelected(id)
+            setSelectedCard(index)
+            return
         }
         setFirstSelected(-1)
         setSelectedCard(-1)
@@ -106,12 +113,12 @@ export const GameController = (props: Props) => {
 
     return (
         <div className={styles.wrapper}>
-            <DeckHolder selected={firstSelected == 0? 1: -1} handleClick={handleDeckHolderSelect} deck={decks[0]}></DeckHolder>
+            <DeckHolder selected={firstSelected == 0 ? 1 : -1} handleClick={handleDeckHolderSelect} deck={decks[0]}></DeckHolder>
             <div className={styles.cardArea}>
                 {decks.map((deck, index) => {
                     if (index === 0 || index > 8)
                         return
-                    return <CardHolder selected={firstSelected === index? selectedCard : -1} clickHandler={handleCardHOlderSelect} key={index} deck={deck} id={index} />
+                    return <CardHolder selected={firstSelected === index ? selectedCard : -1} clickHandler={handleCardHOlderSelect} key={index} deck={deck} id={index} />
                 })}
             </div>
             <div className={styles.nipeConteiners}>
