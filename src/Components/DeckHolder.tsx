@@ -17,6 +17,7 @@ export const DeckHolder = (props: Props) => {
     const revealPlaceholder = revealedCard === props.deck.length ? revealType.EMPTY : revealType.SHOW
 
     function handleClickDeck() {
+        props.handleClick(-1)
         if (revealedCard === 0) {
             setRevealedCard(props.deck.length)
             return

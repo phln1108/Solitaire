@@ -4,18 +4,29 @@ import { Header } from "./Components/Header"
 
 import { useState } from "react"
 import { GameController } from "./Components/GameController"
+import { About } from "./Components/About"
 
 export const App = () => {
   const [deck,setDeck] = useState(shuffle(getDeck(1)))
+  const [showAbout,setShowAbout] = useState(false)
 
   function restart() {
+    console.log("restart");
+    
     setDeck(shuffle(getDeck(1)))
+  }
+
+  function handleAbout() {
+    setShowAbout(!showAbout)
   }
 
   return (
     <>
-      <Header/>
+      <Header about={handleAbout} restart={restart}/>
       <GameController deck={deck}/>
+      {showAbout && 
+      <About toClose={handleAbout} ></About>
+      }
     </>
   )
 }

@@ -1,23 +1,42 @@
 import { useState } from "react";
 import styles from "./DropDown.module.css"
 
-export const Dropdown = () => {
+
+interface DropDownProps {
+    restart: () => void,
+    about?: () => void,
+    return?: () => void,
+}
+
+export const Dropdown = (props: DropDownProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
+    function handleRestart () {
+        setIsOpen(false);
+        props.restart()
+    }
+
+    function handleAbout () {
+        setIsOpen(false);
+        props.about?.()
+    }
+
+    function handleReturn () {
+        setIsOpen(false);
+        props.return?.()
+    }
 
 
     return (
-
         <div>
             <button className={styles.dropdownButton} onClick={() => setIsOpen(!isOpen)}>≡</button>
-
-            {isOpen && (
-               <div>
-                <label>opa</label>
-               </div>
-
-            )}
-
+            {isOpen &&<div className={styles.dropDownList} >
+                <ul>
+                    <li onClick={handleRestart} className={styles.dropDownItem}>Reiniciar</li>
+                    <li onClick={handleAbout} className={styles.dropDownItem}>Sobre</li>
+                    <li onClick={handleReturn} className={styles.dropDownItem}>Voltar</li>
+                </ul>
+            </div>}
         </div>
 
     );

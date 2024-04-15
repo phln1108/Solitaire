@@ -10,7 +10,8 @@
 }
 
 .dropdownButton {
-    background-color: #4CAF50;
+    background-color: var(--gray-600);
+    border-radius: 8px;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -19,5 +20,34 @@
 }
 
 .dropdownButton:hover, .dropdownButton:focus {
-    background-color: #3e8e41;
+    background-color: var(--gray-400);
+}
+
+.dropDownList {
+    position: absolute;
+    /* top: 4rem; */
+    right: 0;
+    background: var(--gray-800);
+    height: fit-content;
+    width: 8rem;
+    padding: 10px 20px ;
+    z-index: 1;
+    border-radius: 8px;
+    margin-top: 0.25rem;
+}
+
+.dropDownItem {
+    color: var(--gray-400);
+    list-style: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dropDownItem + .dropDownItem {
+    border-top: 2px solid var(--gray-600);
+    padding-top: 0.125rem;
+}
+
+.dropDownItem:hover {
+    color: var(--gray-200);
 }

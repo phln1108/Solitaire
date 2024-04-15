@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Card, createPack, getIndex } from "./Cards"
 import { DeckHolder } from "./DeckHolder"
 import { NipeDeckHolder } from "./NipeDeckHolder"
@@ -11,21 +11,25 @@ interface Props {
 }
 
 export const GameController = (props: Props) => {
+    const [decks, setDecks] = useState<Card[][]>(start())
+    const [firstSelected, setFirstSelected] = useState(-1)
+    const [deckHolderCard, setDeckHolderCard] = useState(-1)
+    const [selectedCard, setSelectedCard] = useState(-1)
+    
+    useEffect(()=>{
+        setDecks(start())
+    },[props.deck])
+
     function start() {
         const packs: Card[][] = [[...props.deck]]
-        for (let i = 1; i < 9; i++) {
+        for (let i = 1; i < 8; i++) {
             [packs[0], packs[i]] = createPack(packs[0], i - 1)
         }
         return [...packs, [], [], [], []]
     }
 
-    const [decks, setDecks] = useState(start())
-    const [firstSelected, setFirstSelected] = useState(-1)
-    const [deckHolderCard, setDeckHolderCard] = useState(-1)
-    const [selectedCard, setSelectedCard] = useState(-1)
-
     function handleDeckHolderSelect(cardIndex: number) {
-        if (firstSelected === 0) {
+        if (firstSelected === 0 || cardIndex === -1) {
             setFirstSelected(-1)
             return
         }
@@ -116,16 +120,16 @@ export const GameController = (props: Props) => {
             <DeckHolder selected={firstSelected == 0 ? 1 : -1} handleClick={handleDeckHolderSelect} deck={decks[0]}></DeckHolder>
             <div className={styles.cardArea}>
                 {decks.map((deck, index) => {
-                    if (index === 0 || index > 8)
+                    if (index === 0 || index > 7)
                         return
                     return <CardHolder selected={firstSelected === index ? selectedCard : -1} clickHandler={handleCardHOlderSelect} key={index} deck={deck} id={index} />
                 })}
             </div>
             <div className={styles.nipeConteiners}>
-                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[9]} nipe={"♣️"} id={9}></NipeDeckHolder>
-                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[10]} nipe={"♠️"} id={10}></NipeDeckHolder>
-                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[11]} nipe={"♥️"} id={11}></NipeDeckHolder>
-                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[12]} nipe={"♦️"} id={12}></NipeDeckHolder>
+                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[8]} nipe={"♣️"} id={8}></NipeDeckHolder>
+                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[9]} nipe={"♠️"} id={9}></NipeDeckHolder>
+                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[10]} nipe={"♥️"} id={10}></NipeDeckHolder>
+                <NipeDeckHolder handleClick={handleNipeCardHOlderSelect} deck={decks[11]} nipe={"♦️"} id={11}></NipeDeckHolder>
             </div>
         </div>
     )

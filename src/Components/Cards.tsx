@@ -92,7 +92,7 @@ export function createPack(deck: Card[], num: number): Array<Card[]> {
     return decks
 }
 
-export function getIndex(card : Card) {
+export function getIndex(card: Card) {
     return CardInfo.values.indexOf(card.value)
 }
 
@@ -108,48 +108,23 @@ type CardElementProps = {
     onClick?: () => void
     empty_nipe?: string
     selected: boolean
+    translate?: number
 }
 
 
 export const CardElement = (props: CardElementProps) => {
+    const translateStyles = {transform: `translateY(-${props.translate || 0}%)`,}
     switch (props.reveal) {
         case revealType.SHOW:
             const colorStyle = props.card.color === "r" ? { color: "#be1931" } : { color: "black" }
             return (
-                    <div className={styles.card + " " + (props.selected ? styles.selected : "")} onClick={props.onClick}>
-                        <div className={styles.cardBeginLabel}>
-                            <label className={styles.cardLabel} style={colorStyle}>{props.card.value}</label>
-                            <label className={styles.cardLabelNipe} style={colorStyle}>{props.card.nipe}</label>
-                        </div>
-                        <label className={styles.cardLabelMiddle} style={colorStyle}>{props.card.nipe}</label>
-                        <div className={styles.cardLabelEnd}>
-                            <label className={styles.cardLabel} style={colorStyle}>{props.card.value}</label>
-                            <label className={styles.cardLabelNipe} style={colorStyle}>{props.card.nipe}</label>
-                        </div>
-                    </div>
-            )
-        case revealType.HIDDEN:
-            return (
-                <div className={styles.card + " " + styles.reverse} onClick={props.onClick}>
-                    <label className={styles.cardLabelMiddle}>🌀</label>
-                </div>
-            )
-        default:
-            return (
-                <div className={styles.card + " " + styles.empty} onClick={props.onClick}>
-                    <label className={styles.cardLabelMiddle}>{props.empty_nipe === undefined ? "O" : props.empty_nipe}</label>
-                </div>
-            )
-    }
-}
-
-export const TopOfCard = (props: CardElementProps) => {
-    switch (props.reveal) {
-        case revealType.SHOW:
-            const colorStyle = props.card.color === "r" ? { color: "#be1931" } : { color: "black" }
-            return (
-                <div className={styles.topOfCard + " " + (props.selected ? styles.selected : "")} onClick={props.onClick}>
+                <div className={styles.card + " " + (props.selected && styles.selected)} onClick={props.onClick} style={translateStyles}>
                     <div className={styles.cardBeginLabel}>
+                        <label className={styles.cardLabel} style={colorStyle}>{props.card.value}</label>
+                        <label className={styles.cardLabelNipe} style={colorStyle}>{props.card.nipe}</label>
+                    </div>
+                    <label className={styles.cardLabelMiddle} style={colorStyle}>{props.card.nipe}</label>
+                    <div className={styles.cardLabelEnd + " " + styles.rotated}>
                         <label className={styles.cardLabel} style={colorStyle}>{props.card.value}</label>
                         <label className={styles.cardLabelNipe} style={colorStyle}>{props.card.nipe}</label>
                     </div>
@@ -157,11 +132,15 @@ export const TopOfCard = (props: CardElementProps) => {
             )
         case revealType.HIDDEN:
             return (
-                <div className={styles.topOfCard + " " + styles.reverse} onClick={props.onClick}/>
+                <div className={styles.card + " " + styles.reverse} onClick={props.onClick} style={{ transform: `translateY(-${props.translate || 0}%)` }}>
+                    <label className={styles.cardLabelMiddle}>🌀</label>
+                </div>
             )
         default:
             return (
-                <div className={styles.topOfCard + " " + styles.empty} onClick={props.onClick}/>
+                <div className={styles.card + " " + styles.empty} onClick={props.onClick} style={{ transform: `translateY(-${props.translate || 0}%)` }}>
+                    <label className={styles.cardLabelMiddle}>{props.empty_nipe === undefined ? "O" : props.empty_nipe}</label>
+                </div>
             )
     }
 }
