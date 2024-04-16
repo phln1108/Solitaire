@@ -72,7 +72,7 @@
 }
 
 @keyframes animate {
-    50% {
+    10% {
         filter: hue-rotate(350deg);
     }
 }
