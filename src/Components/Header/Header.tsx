@@ -1,7 +1,7 @@
 import styles from "./Header.module.css"
 
-import logo from "../assets/logo.png"
-import { Dropdown } from "./DropDown"
+import logo from "../../assets/logo.png"
+import { Dropdown } from "../DropDown/DropDown"
 
 interface HeaderProps {
     restart: () => void,

@@ -6,20 +6,21 @@ export const CardInfo = {
     colors: ["r", "b"]
 }
 
+/**
+ * A Struct representing a playing card.
+ * 
+ * See {@link CardInfo} to know it's possible arrangements
+ */
 export type Card = {
     value: string //"A" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "J" | "Q" | "K"
     nipe: string //"♣️" | "♠️" | "♥️" | "♦️"
     color: string //"r" | "b"
     reveal: revealType
 }
-
-export type Deck = {
-    cards: Array<Card>
-}
 /**
- * Create a Deck of cards
+ * Create a Deck of {@link Card}s
  * @param num number of decks to be created
- * @returns A deck with deck in it
+ * @returns A deck of {@link Card}s with `num` decks in it
  */
 export function getDeck(num: number = 1): Card[] {
     var deck: Card[] = []
@@ -45,7 +46,7 @@ function getRandomInt(max: number): number {
 
 
 /**
- * Shuffle's the card in the given deck
+ * Shuffle's the {@link Card}s in the given deck
  * @param deck Deck to be shuffled 
  * @returns A copy of the original deck, but shuffled
  */
@@ -62,26 +63,28 @@ export function shuffle(deck: Card[]): Card[] {
 
 /**
  * Divide the given Deck to multiples parts setted by `num`.
- * The last pack may not have the same quantity compare to the others if `num` is not a divisor of total of cards 
- * @param deck deck to divide into packs
- * @param num max number of cards in a pack (default = 52) 
+ * 
+ * The last pack may not have the same quantity compare to the others if `num` is not a divisor of the total of {@link Card}s
+ * @param deck Deck to divide into packs
+ * @param num Max number of {@link Card}s in a pack (default = 52) 
  * @returns Array of decks containing the divided packs
  */
-export function divideDeck(deck: Deck, num: number = 52): Array<Deck> {
-    var decks: Array<Deck> = []
-    while (deck.cards.length !== 0) {
-        var new_deck: Deck = { cards: deck.cards.splice(0, num > deck.cards.length ? deck.cards.length : num) }
+export function divideDeck(deck: Card[], num: number = 52): Card[][] {
+    var decks: Card[][] = []
+    while (deck.length !== 0) {
+        var new_deck: Card[] = deck.splice(0, num > deck.length ? deck.length : num)
         decks.push(new_deck)
     }
     return decks
 }
 
 /**
- * Divide a single pack from the original deck setted by `num`.
+ * Divide a single pack of {@link Card}s from the original deck setted by `num`.
+ * 
  * If the deck don't have sufficient cards to divide, the pack gains the max amount possible.
- * @param deck deck to remove a pack
- * @param num number of cards to create a new pack
- * @returns Array of decks → [ given deck, new pack formed ]
+ * @param deck Deck to remove a pack.
+ * @param num Number of cards to create a new pack.
+ * @returns Array of decks ({@link Card}[][]) → [ given deck, new pack formed ]
  */
 export function createPack(deck: Card[], num: number): Array<Card[]> {
     var decks: Array<Card[]> = []
@@ -92,9 +95,15 @@ export function createPack(deck: Card[], num: number): Array<Card[]> {
     return decks
 }
 
+/**
+ * Get index of {@link Card} based on {@link CardInfo}.
+ * @param card {@link Card} to get it's index.
+ * @returns The index of given {@link Card}
+ */
 export function getIndex(card: Card) {
     return CardInfo.values.indexOf(card.value)
 }
+
 
 export enum revealType {
     SHOW,
@@ -110,7 +119,6 @@ type CardElementProps = {
     selected: boolean
     translate?: number
 }
-
 
 export const CardElement = (props: CardElementProps) => {
     const translateStyles = { transform: `translateY(-${props.translate || 0}%)`, }

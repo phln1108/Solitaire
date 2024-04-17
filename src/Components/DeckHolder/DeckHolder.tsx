@@ -1,17 +1,15 @@
 import { useState } from "react"
-import { Card, CardElement, revealType } from "./Cards"
+import { Card, CardElement, revealType } from "../Cards/Cards"
 import styles from "./DeckHolder.module.css"
 
 
-
-
-interface Props {
+interface DeckHolderProps {
     deck: Card[]
     handleClick: (cardIndex: number) => void
     selected: number
 }
 
-export const DeckHolder = (props: Props) => {
+export const DeckHolder = (props: DeckHolderProps) => {
     const [revealedCard,setRevealedCard] = useState(props.deck.length)
     const revealDeck = props.deck.length === 0 ? revealType.EMPTY : revealType.HIDDEN
     const revealPlaceholder = revealedCard === props.deck.length ? revealType.EMPTY : revealType.SHOW

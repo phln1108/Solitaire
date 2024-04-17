@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { Card, createPack, getIndex } from "./Cards"
-import { DeckHolder } from "./DeckHolder"
-import { NipeDeckHolder } from "./NipeDeckHolder"
-import { CardHolder } from "./CardHolder"
+import { Card, createPack, getIndex } from "../Cards/Cards"
+import { DeckHolder } from "../DeckHolder/DeckHolder"
+import { NipeDeckHolder } from "../NipeDeckHolder/NipeDeckHolder"
+import { CardHolder } from "../CardHolder/CardHolder"
 
 import styles from "./GameController.module.css"
 

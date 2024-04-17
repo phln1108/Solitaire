@@ -1,10 +1,10 @@
-import { getDeck, shuffle } from "./Components/Cards"
-import { Header } from "./Components/Header"
+import { getDeck, shuffle } from "./Components/Cards/Cards"
+import { Header } from "./Components/Header/Header"
 // import styles from "./App.module.css"
 
 import { useState } from "react"
-import { GameController } from "./Components/GameController"
-import { About } from "./Components/About"
+import { GameController } from "./Components/GameController/GameController"
+import { About } from "./Components/About/About"
 
 export const App = () => {
   const [deck,setDeck] = useState(shuffle(getDeck(1)))

@@ -11,17 +11,17 @@ interface DropDownProps {
 export const Dropdown = (props: DropDownProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    function handleRestart () {
+    function handleRestart() {
         setIsOpen(false);
         props.restart()
     }
 
-    function handleAbout () {
+    function handleAbout() {
         setIsOpen(false);
         props.about?.()
     }
 
-    function handleReturn () {
+    function handleReturn() {
         setIsOpen(false);
         props.return?.()
     }
@@ -30,13 +30,15 @@ export const Dropdown = (props: DropDownProps) => {
     return (
         <div>
             <button className={styles.dropdownButton} onClick={() => setIsOpen(!isOpen)}>≡</button>
-            {isOpen &&<div className={styles.dropDownList} >
-                <ul>
-                    <li onClick={handleRestart} className={styles.dropDownItem}>Reiniciar</li>
-                    <li onClick={handleAbout} className={styles.dropDownItem}>Sobre</li>
-                    <li onClick={handleReturn} className={styles.dropDownItem}>Voltar</li>
-                </ul>
-            </div>}
+            {isOpen &&
+                <div className={styles.dropDownList} >
+                    <ul>
+                        <li onClick={handleRestart} className={styles.dropDownItem}>Restart</li>
+                        <li onClick={handleAbout} className={styles.dropDownItem}>About Project</li>
+                        <li onClick={handleReturn} className={styles.dropDownItem}>Return</li>
+                    </ul>
+                </div>
+            }
         </div>
 
     );

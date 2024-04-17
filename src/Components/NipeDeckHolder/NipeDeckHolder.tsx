@@ -1,4 +1,4 @@
-import { Card, CardElement, revealType } from "./Cards"
+import { Card, CardElement, revealType } from "../Cards/Cards"
 
 interface Props {
     deck: Card[],
