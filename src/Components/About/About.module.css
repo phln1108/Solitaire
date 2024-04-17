@@ -1,0 +1,36 @@
+.aboutConteiner {
+    position: absolute;
+    min-height: 20rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--gray-800);
+    padding: 1rem;
+    border-radius: 8px;
+    width: 50rem;
+}
+
+.header {
+    height: 2rem;
+    display: flex;
+    border-bottom: 2px solid var(--gray-600);
+    padding-bottom: 0.25;
+    margin-bottom: 0.25;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header button {
+    outline: none;
+    background: transparent;
+    border: none;
+    font-size: 1.75rem;
+    cursor: pointer;
+    color: var(--gray-400);
+    transition: 0.3s;
+}
+
+.header button:hover{
+    color: var(--gray-200)
+}

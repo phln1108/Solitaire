@@ -1,13 +1,34 @@
-import React from 'react';
-import './App.css';
-import { Controler } from './Componets/Controler';
+import { getDeck, shuffle } from "./Components/Cards/Cards"
+import { Header } from "./Components/Header/Header"
+// import styles from "./App.module.css"
 
-function App() {
+import { useState } from "react"
+import { GameController } from "./Components/GameController/GameController"
+import { About } from "./Components/About/About"
+
+export const App = () => {
+  const [deck,setDeck] = useState(shuffle(getDeck(1)))
+  const [showAbout,setShowAbout] = useState(false)
+
+  function restart() {
+    console.log("restart");
+    
+    setDeck(shuffle(getDeck(1)))
+  }
+
+  function handleAbout() {
+    setShowAbout(!showAbout)
+  }
+
   return (
-    <div className="App">
-      <Controler/>
-    </div>
-  );
+    <>
+      <Header about={handleAbout} restart={restart}/>
+      <GameController deck={deck}/>
+      {showAbout && 
+      <About toClose={handleAbout} ></About>
+      }
+    </>
+  )
 }
 
-export default App;
+export default App

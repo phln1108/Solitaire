@@ -1,0 +1,27 @@
+.wrapper {
+    margin: 1rem auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    
+}
+
+.cardArea {
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.nipeConteiners {
+    display: block;
+    gap: 0.5rem;
+}
+
+.nipeConteiners *{
+    margin-bottom: 0.250rem;
+}

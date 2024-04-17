@@ -1,0 +1,78 @@
+.card {
+    display: flex;
+    width: 5rem;
+    height: 7.5rem;
+    border-radius: 8px;
+    border: 3px solid transparent;
+    position: relative;
+    background: white;
+    cursor: pointer;
+    -webkit-box-shadow: 0px -2px 4px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px -2px 4px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px -2px 4px 0px rgba(0, 0, 0, 0.75);
+}
+
+.cardBeginLabel {
+    margin-left: 0.4rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+}
+
+.cardLabel {
+    font-size: x-large;
+    cursor: pointer;
+}
+
+.cardLabelNipe {
+    font-size: small;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.cardLabelEnd {
+    margin-right: 0.4ex;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+}
+
+.cardLabelMiddle {
+    font-size: 200%;
+    position: absolute;
+    align-self: center;
+    width: 100%;
+    text-align: center;
+}
+
+.rotated {
+    transform: rotate(180deg);
+}
+
+.reverse {
+    background-color: #75756a;
+}
+
+.empty {
+    color: darkgray;
+    background-color: gray;
+}
+
+
+.selected {
+    border-color: red;
+    border-width: 3px;
+    animation: animate 2s linear infinite;
+}
+
+@keyframes animate {
+    10% {
+        filter: hue-rotate(350deg);
+    }
+}
