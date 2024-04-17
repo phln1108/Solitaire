@@ -1,11 +1,10 @@
 import { useState } from "react";
 import styles from "./DropDown.module.css"
 
-
 interface DropDownProps {
     restart: () => void,
     about?: () => void,
-    return?: () => void,
+    return?: () => void
 }
 
 export const Dropdown = (props: DropDownProps) => {
@@ -26,7 +25,6 @@ export const Dropdown = (props: DropDownProps) => {
         props.return?.()
     }
 
-
     return (
         <div>
             <button className={styles.dropdownButton} onClick={() => setIsOpen(!isOpen)}>≡</button>
@@ -40,7 +38,5 @@ export const Dropdown = (props: DropDownProps) => {
                 </div>
             }
         </div>
-
     );
-
 };

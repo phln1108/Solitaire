@@ -15,10 +15,10 @@ export const GameController = (props: Props) => {
     const [firstSelected, setFirstSelected] = useState(-1)
     const [deckHolderCard, setDeckHolderCard] = useState(-1)
     const [selectedCard, setSelectedCard] = useState(-1)
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         setDecks(start())
-    },[props.deck])
+    }, [props.deck])
 
     function start() {
         const packs: Card[][] = [[...props.deck]]
@@ -38,15 +38,12 @@ export const GameController = (props: Props) => {
     }
 
     function handleCardHOlderSelect(id: number, index: number) {
-        console.log(decks[id][decks[id].length - 1])
-
         if (firstSelected === id || (index == -1 && firstSelected == -1)) {
-            if (index !== selectedCard){
+            if (index !== selectedCard) {
                 setSelectedCard(index);
                 return
             }
             setFirstSelected(-1)
-            // setSelectedCard(-1)
             return
         }
 
@@ -56,10 +53,8 @@ export const GameController = (props: Props) => {
             return
         }
 
-        var indexCard = firstSelected === 0 ? deckHolderCard : selectedCard
-        console.log(indexCard)
+        const indexCard = firstSelected === 0 ? deckHolderCard : selectedCard
         const card: Card = decks[firstSelected][indexCard]
-        console.log(card)
 
         if ((decks[id].length !== 0 && card.color !== decks[id][decks[id].length - 1].color && getIndex(decks[id][decks[id].length - 1]) - 1 === getIndex(card)) || (decks[id].length === 0 && card.value === "K")) {
             if (firstSelected == 0) {
@@ -75,18 +70,18 @@ export const GameController = (props: Props) => {
                 setDecks(old_decks => {
                     const new_decks = [...old_decks]
                     const packOfCards = new_decks[firstSelected].slice(indexCard)
-                    console.log(packOfCards)
                     new_decks[firstSelected] = new_decks[firstSelected].slice(0, indexCard)
                     new_decks[id] = [...new_decks[id], ...packOfCards]
-                    console.log(new_decks[id])
                     return new_decks
                 })
             }
+
         } else if ((index !== -1 || firstSelected !== -1)) {
             setFirstSelected(id)
             setSelectedCard(index)
             return
         }
+
         setFirstSelected(-1)
         setSelectedCard(-1)
     }
@@ -95,10 +90,9 @@ export const GameController = (props: Props) => {
         if (firstSelected === -1) {
             return
         }
-        var index = firstSelected === 0 ? deckHolderCard : decks[firstSelected].length - 1
-        console.log(index)
+
+        const index = firstSelected === 0 ? deckHolderCard : decks[firstSelected].length - 1
         const card: Card = decks[firstSelected][index]
-        console.log(card)
 
         if ((decks[id].length === 0 && card.value === "A" || (decks[id].length !== 0 && getIndex(decks[id][decks[id].length - 1]) === getIndex(card) - 1)) && card.nipe === nipe) {
             setDecks(old_decks => {
@@ -112,8 +106,6 @@ export const GameController = (props: Props) => {
         }
         setFirstSelected(-1)
     }
-
-
 
     return (
         <div className={styles.wrapper}>

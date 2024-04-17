@@ -6,7 +6,7 @@ import { Dropdown } from "../DropDown/DropDown"
 interface HeaderProps {
     restart: () => void,
     about?: () => void,
-    return?: () => void,
+    return?: () => void
 }
 
 export function Header(props: HeaderProps) {

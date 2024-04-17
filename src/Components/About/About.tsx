@@ -5,7 +5,6 @@ interface AboutProps {
 }
 
 export const About = (props : AboutProps) => {
-
     return (
         <div className={style.aboutConteiner}>
             <div className={style.header}>

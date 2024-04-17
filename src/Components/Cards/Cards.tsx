@@ -44,7 +44,6 @@ function getRandomInt(max: number): number {
     return Math.floor(Math.random() * max);
 }
 
-
 /**
  * Shuffle's the {@link Card}s in the given deck
  * @param deck Deck to be shuffled 
@@ -104,7 +103,6 @@ export function getIndex(card: Card) {
     return CardInfo.values.indexOf(card.value)
 }
 
-
 export enum revealType {
     SHOW,
     HIDDEN,
@@ -113,10 +111,10 @@ export enum revealType {
 
 type CardElementProps = {
     card: Card,
-    reveal: revealType
-    onClick?: () => void
-    empty_nipe?: string
-    selected: boolean
+    reveal: revealType,
+    onClick?: () => void,
+    empty_nipe?: string,
+    selected: boolean,
     translate?: number
 }
 
