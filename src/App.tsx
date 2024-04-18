@@ -7,12 +7,12 @@ import { GameController } from "./Components/GameController/GameController"
 import { About } from "./Components/About/About"
 
 export const App = () => {
-  const [deck,setDeck] = useState(shuffle(getDeck(1)))
-  const [showAbout,setShowAbout] = useState(false)
+  const [deck, setDeck] = useState(shuffle(getDeck(1)))
+  const [showAbout, setShowAbout] = useState(false)
 
   function restart() {
     console.log("restart");
-    
+
     setDeck(shuffle(getDeck(1)))
   }
 
@@ -22,10 +22,10 @@ export const App = () => {
 
   return (
     <>
-      <Header about={handleAbout} restart={restart}/>
-      <GameController deck={deck}/>
-      {showAbout && 
-      <About toClose={handleAbout} ></About>
+      <Header about={handleAbout} restart={restart} />
+      <GameController deck={deck} />
+      {showAbout &&
+        <About toClose={handleAbout} />
       }
     </>
   )
